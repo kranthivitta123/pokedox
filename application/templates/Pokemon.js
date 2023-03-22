@@ -15,6 +15,9 @@ const Pokemon = ({ types }) => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state);
   const [pokemonData, setPokemonData] = useState([]);
+  const [pokemonUrl, setPokemonUrl] = useState(
+    "https://pokeapi.co/api/v2/pokemon"
+  );
   const { genders, males, females, genderless } = useSelector(
     (state) => state.pokemon
   );
@@ -37,9 +40,10 @@ const Pokemon = ({ types }) => {
 
   const getPokemons = useCallback(() => {
     agent.pokemonApis.allPokemon().then((data) => {
+      setPokemonUrl(data.next);
       getPokemonDetails(data.results);
     });
-  }, []);
+  }, [pokemonUrl]);
 
   /**
    * @method To Fetch Individual PokemonData
