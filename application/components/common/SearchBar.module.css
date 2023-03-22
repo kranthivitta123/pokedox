@@ -1,0 +1,12 @@
+.form__field {
+    background: #c9dde2;
+    border-radius: 8px;
+    position: relative;
+}
+
+.icon {
+    position: absolute;
+    right: 0;
+    top: 20%;
+    left: 95%;
+}

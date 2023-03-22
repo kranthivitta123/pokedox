@@ -1,0 +1,25 @@
+.dropdown {
+    background: #c9dde2;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem;
+    position: relative;
+}
+
+.white {
+    background-color: #ffffff;
+}
+
+.drop-panel {
+    position: absolute;
+    width: 100%;
+    top: 110%;
+    left: 0%;
+    background: #ffffff;
+    box-shadow: 0px 4px 14px rgba(46, 49, 86, 0.4);
+    border-radius: 8px;
+    max-height: 250px;
+    overflow-y: auto;
+}

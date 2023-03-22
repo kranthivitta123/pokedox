@@ -1,0 +1,23 @@
+.outer {
+    background-color: #93b2b2;
+    width: 100%;
+    height: 13px;
+    position: relative;
+}
+
+.inner {
+    background: #2e3156;
+    height: 100%;
+}
+
+.inner > span {
+    color: #ffffff;
+}
+
+.value {
+    position: absolute;
+    left: 2px;
+    top: 0px;
+    font-size: 8px;
+    color: #ffffff;
+}

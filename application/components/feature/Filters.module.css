@@ -1,0 +1,7 @@
+.mymodal .modal-content {
+    background-color: #deeded !important;
+}
+
+button {
+    flex: 1;
+}

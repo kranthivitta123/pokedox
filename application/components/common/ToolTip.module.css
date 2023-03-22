@@ -1,0 +1,22 @@
+.description {
+    background: #2e3156;
+    box-shadow: 0px 4px 20px #2e3156;
+    border-radius: 8px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* bottom: 50%; */
+    padding: 1rem;
+    width: 100%;
+    z-index: 1;
+    font-size: 10px;
+    color: #ffffff;
+}
+
+.cross {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
