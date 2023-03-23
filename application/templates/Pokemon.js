@@ -8,6 +8,10 @@ import {
 } from "../reducers/pokemon";
 import agent from "../api";
 import PokemonContext from "../context/PokemonContext";
+import { Button, Col, Container, Row } from "react-bootstrap";
+import Banner from "../components/common/Banner";
+import Filters from "../components/feature/Filters";
+import PokemonList from "../components/feature/PokemonList";
 
 let pokemonList = [];
 
@@ -22,7 +26,6 @@ const Pokemon = ({ types }) => {
     (state) => state.pokemon
   );
   const { contextData } = useContext(PokemonContext);
-  console.log("PokemonContext", pokemonData);
   useEffect(() => {
     masterData();
   }, []);
@@ -60,7 +63,130 @@ const Pokemon = ({ types }) => {
       }
     });
   };
-  return <div>Pokemon</div>;
+
+  useEffect(() => {
+    applyFilters();
+  }, [contextData, pokemonList]);
+
+  /**
+   * @method To filter Pokemon Data
+   *
+   */
+  const applyFilters = useCallback(() => {
+    if (
+      contextData.search !== "" ||
+      contextData.types.length ||
+      contextData.gender.length
+    ) {
+      const filteredArr = pokemonList.filter((item) => {
+        return (
+          (contextData.search !== ""
+            ? item.name.indexOf(contextData.search) !== -1 ||
+              item.id.toString().indexOf(contextData.search) !== -1
+            : true) &&
+          (contextData.types.length ? checkTypes(item) : true) &&
+          (contextData.gender && contextData.gender.length ? checkGenders(item) : true)
+        );
+      });
+      setPokemonData(filteredArr);
+    } else {
+      setPokemonData(pokemonList);
+    }
+  }, [pokemonData, contextData]);
+
+  /**
+   * @method To check existence of selected types
+   * @param {*} item
+   * @return {*}
+   */
+
+  const checkTypes = (item) => {
+    let isExists = false;
+    if (item && item.types.length) {
+      item.types.forEach((val) => {
+        if (
+          contextData.types.indexOf(val.type.name) !== -1 ||
+          contextData.types.indexOf(val.type.name) === 0
+        ) {
+          isExists = true;
+          return;
+        }
+      });
+      return isExists ? true : false;
+    }
+    return true;
+  };
+
+  /**
+   * @method To check existence of selected genders
+   * @param {*} item
+   * @return {*}
+   */
+
+  const checkGenders = (val) => {
+    let isExists = false;
+    if (contextData.gender && contextData.gender.length) {
+      contextData.gender.forEach((item) => {
+        if (item === "male") {
+          const index = males.indexOf(val.name);
+          if (index !== -1) {
+            isExists = true;
+            return;
+          }
+        } else if (item === "female") {
+          const index = females.indexOf(val.name);
+          if (index !== -1) {
+            isExists = true;
+            return;
+          }
+        } else {
+          const index = genderless.indexOf(val.name);
+          if (index !== -1) {
+            isExists = true;
+            return;
+          }
+        }
+      });
+      return isExists ? true : false;
+    }
+    return true;
+  };
+  return (
+    <Container>
+      <Row className="mt-4 mb-4">
+        <Col>
+          <Banner />
+        </Col>
+      </Row>
+      <Row className="mt-4 mb-4">
+        <Col>
+          <Filters type={types} gender={genders} />
+        </Col>
+      </Row>
+      <Row className="mt-4 mb-4">
+        <Col>
+          {pokemonData ? (
+            <PokemonList
+              data={pokemonData}
+              male={males}
+              female={females}
+              genderless={genderless}
+            />
+          ) : (
+            <h3>No Data Found</h3>
+          )}
+        </Col>
+      </Row>
+      <div
+        className="d-flex justify-content-center align-items-center m-auto"
+        style={{ width: "20%" }}
+      >
+        <Button variant="dark w-20" onClick={() => getPokemons()}>
+          Load More
+        </Button>
+      </div>
+    </Container>
+  );
 };
 
 export default Pokemon;

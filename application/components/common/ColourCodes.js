@@ -4,7 +4,6 @@ export class ColorCodes {
   }
 
   /**
-   * @author kranthi kumar reddy
    * @method To extract color code
    * @param {*} data
    */
@@ -14,7 +13,6 @@ export class ColorCodes {
   }
 
   /**
-   * @author kranthi kumar reddy
    * @method To apply gradient or background
    * @param {*} data
    */

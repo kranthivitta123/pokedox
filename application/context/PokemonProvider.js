@@ -90,8 +90,8 @@ const PokemonProvider = ({ children }) => {
     changeGenderLess(data) {
       dispatch({ type: "CHANGE_GENDERLESS", payload: data });
     },
-    reset(data) {
-      dispatch({ type: "RESET", payload: data });
+    reset() {
+      dispatch({ type: "RESET"});
     },
     setModal() {
       dispatch({ type: "SETMODAL", payload: data });

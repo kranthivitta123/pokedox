@@ -2,13 +2,14 @@ import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useRef, useState } from "react";
 import MuiCheckBox from "../common/MuiCheckBox";
-import "./CustomDropDown.css";
+import classNames from "./CustomDropDown.module.css";
 import { capitalize } from "../../utils/Strings";
 import { useOutsideAlerter } from "../../hooks/outsideClick";
 
 const CustomDropDown = (props) => {
   const [showPanel, setShowPanel] = useState(false);
   const { name } = props;
+  console.log("props values",props)
   const { selectedTypes } = props;
   const { selectedGenders } = props;
   const wrapperRef = useRef(name);
@@ -19,7 +20,6 @@ const CustomDropDown = (props) => {
   }, [outside]);
 
   /**
-   * @author kranthi kumar reddy
    * @method Check checked status
    * @param {*} val
    * @return {*}
@@ -32,7 +32,6 @@ const CustomDropDown = (props) => {
   };
 
   /**
-   * @author kranthi kumar reddy
    * @method Check checked status
    * @param {*} val
    * @return {*}
@@ -46,7 +45,6 @@ const CustomDropDown = (props) => {
   };
 
   /**
-   * @author kranthi kumar reddy
    * @method Change Dropdown changes
    * @param {*} val
    * @return {*}
@@ -62,7 +60,7 @@ const CustomDropDown = (props) => {
 
   return (
     <div
-      className={`dropdown pointer ${showPanel ? "white" : ""}`}
+      className={`${classNames.dropdown} pointer ${showPanel ? `${classNames.white}` : ""}`}
       tabIndex="0"
       aria-label="Checkbox Dropdown"
       role="Combobox"
@@ -101,7 +99,7 @@ const CustomDropDown = (props) => {
         />
       </span>
       {showPanel ? (
-        <div className="drop-panel">
+        <div className={classNames['drop-panel']}>
           <ul className="list-group list-group-flush">
             {props.values.map((item, index) => {
               return (

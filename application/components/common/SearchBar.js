@@ -9,7 +9,6 @@ const SearchBar = (props) => {
   const handleEvent = debounce(() => saveInput());
 
   /**
-   * @author kranthi kumar reddy
    * @method To delay key up event
    * @param {*} func
    * @param {number} [timeout=1000]
@@ -27,7 +26,6 @@ const SearchBar = (props) => {
   }
 
   /**
-   * @author kranthi kumar reddy
    * @method Emit text value
    */
 

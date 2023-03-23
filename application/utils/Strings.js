@@ -1,5 +1,6 @@
 export function capitalize(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
+  console.log("str",str)
+  return str ? str.charAt(0).toUpperCase() + str.slice(1) : '';
 }
 
 export function prefixAdd(id, prefix_id = "0") {

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 import { Codes } from "../../utils/PokemonColours";
 import { capitalize, prefixAdd } from "../../utils/Strings";
@@ -15,7 +16,6 @@ const PokemonItem = (props) => {
       ? props.pokemonItem.types.map((item) => item.type.name)
       : [];
   /**
-   * @author kranthi kumar reddy
    * @code To bind dynamic style
    * @param {*} data
    */
@@ -23,7 +23,6 @@ const PokemonItem = (props) => {
   const style = codes.getBackgroundColor(types);
 
   /**
-   * @author kranthi kumar reddy
    * @method To show pop up
    * @param {*} data
    */

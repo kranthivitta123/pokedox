@@ -34,6 +34,10 @@ const pokemonSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getPokemonGenders.fulfilled, (state, action) => {
       state.genders = action.payload.results;
+      if (action.payload && action.payload.results.length) {
+        let arr = action.payload.results.map((val) => val.name);
+        state.genders = arr;
+      }
     });
     builder.addCase(getPokemonMale.fulfilled, (state, action) => {
       if (action.payload && action.payload.pokemon_species_details.length) {

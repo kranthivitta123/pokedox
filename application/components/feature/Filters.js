@@ -1,32 +1,31 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useContext, useState } from "react";
 import { Button, Col, Row } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { filterActions } from "../../store";
 import SearchBar from "../common/SearchBar";
 import CustomDropDown from "./CustomDropDown";
 import filterIcon from "../../assets/filter_icon.svg";
 import Modal from "react-bootstrap/Modal";
 import ExpansionPanel from "./ExpansionPanel";
+import PokemonContext from "@/application/context/PokemonContext";
 
 const Filters = (props) => {
   const { type } = props;
-  const dispatch = useDispatch();
+  const PokemonContextData = useContext(PokemonContext);
+  console.log("Filter ", PokemonContextData);
   const handleSearch = (str) => {
-    dispatch(filterActions.changeSearch(str));
+    PokemonContextData.changeSearch(str);
   };
-  const selectedTypes = useSelector((state) => state.filterSlice.types);
-  const selectedGenders = useSelector((state) => state.filterSlice.gender);
-  const selectedStr = useSelector((state) => state.filterSlice.search);
+  const selectedTypes = PokemonContextData?.contextData?.types;
+  const selectedGenders = PokemonContextData?.contextData?.gender;
+  const selectedStr = PokemonContextData?.contextData?.search;
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
 
   const reset = () => {
-    dispatch(filterActions.reset());
+    PokemonContextData.reset();
     setShow(false);
   };
 
   /**
-   * @author kranthi kumar reddy
    * @method Dispatch Filter changes
    * @param {*} type
    * @param {*} item
@@ -39,13 +38,13 @@ const Filters = (props) => {
       status
         ? typesSelected.push(item)
         : typesSelected.splice(typesSelected.indexOf(item), 1);
-      dispatch(filterActions.changeTypes(typesSelected));
+      PokemonContextData.changeTypes(typesSelected);
     } else {
       const gendersSelected = [...selectedGenders];
       status
         ? gendersSelected.push(item)
         : gendersSelected.splice(gendersSelected.indexOf(item), 1);
-      dispatch(filterActions.changeGender(gendersSelected));
+      PokemonContextData.changeGender(gendersSelected);
     }
   };
 
@@ -61,10 +60,10 @@ const Filters = (props) => {
         <Col
           xs={2}
           className="d-sm-block d-xs-block d-md-none"
-          style={{ "marginTop": "20px" }}
+          style={{ marginTop: "20px" }}
         >
           <img
-            src={filterIcon}
+            src={filterIcon.src}
             className="filter pointer"
             alt="Filter"
             tabIndex="0"

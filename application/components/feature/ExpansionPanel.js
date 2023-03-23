@@ -11,7 +11,6 @@ const ExpansionPanel = (props) => {
   const { selectedGenders } = props;
 
   /**
-   * @author kranthi kumar reddy
    * @method Check checked status
    * @param {*} val
    * @return {*}
@@ -24,7 +23,6 @@ const ExpansionPanel = (props) => {
   };
 
   /**
-   * @author kranthi kumar reddy
    * @method Check checked status
    * @param {*} val
    * @return {*}
@@ -38,7 +36,6 @@ const ExpansionPanel = (props) => {
   };
 
   /**
-   * @author kranthi kumar reddy
    * @method Change Dropdown changes
    * @param {*} val
    * @return {*}

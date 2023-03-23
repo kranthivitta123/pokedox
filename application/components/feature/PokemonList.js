@@ -1,28 +1,24 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext } from "react";
 import { Col, Row } from "react-bootstrap";
 import PokemonItem from "./PokemonItem";
 import { useState } from "react";
-import Modal from "react-bootstrap/Modal";
-import PokemonDetail from "./PokemonDetail";
-import { useDispatch, useSelector } from "react-redux";
-import { filterActions } from "../../store";
+import PokemonContext from "@/application/context/PokemonContext";
 
 const PokemonList = ({ data }) => {
-  const dispatch = useDispatch();
-  const handleClose = () => dispatch(filterActions.setModal(false));
+  const PokemonContextData = useContext(PokemonContext);
+  const handleClose = () => PokemonContextData?.setModal(false);
   //const handleShow = () => setShow(true);
   const [selectedPokemon, setPokemon] = useState(null);
-  const show = useSelector((state) => state.filterSlice.modal);
+  const show = PokemonContextData?.contextData?.modal;
 
   /**
-   * @author kranthi kumar reddy
    * @method To set pokemon data and show modal
    * @param {*} val
    */
 
   function selectedItem(val) {
     setPokemon(val);
-    dispatch(filterActions.setModal(true));
+    PokemonContextData.setModal(true);
   }
 
   return (
@@ -39,14 +35,6 @@ const PokemonList = ({ data }) => {
           );
         })}
       </Row>
-      <Modal show={show} onHide={handleClose} dialogClassName="modal-50w">
-        <Modal.Header>
-          <Modal.Title></Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <PokemonDetail data={selectedPokemon} />
-        </Modal.Body>
-      </Modal>
     </Fragment>
   );
 };

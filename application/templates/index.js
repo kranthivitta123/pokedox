@@ -8,10 +8,10 @@ import agent from "../api";
  */
 const ServerSideProps = async function getServerSideProps() {
   const pokemonTypes = await agent.pokemonApis.allTypes();
-  const transformedTypes = pokemonTypes.results.map((val) => val.name);
+  const types = pokemonTypes.results.map((val) => val.name);
   return {
     props: {
-      types: { transformedTypes },
+      types,
     },
   };
 };
