@@ -1,10 +1,11 @@
 import React from "react";
-import "./Chips.css";
+import classNames from "./Chips.module.css";
 
 const Chip = (props) => {
   const styleName = { background: "#" + props.style };
+  const names = `d-block text-center ${classNames.chip}`;
   return (
-    <span className="d-block text-center chip" style={styleName} tabIndex="0">
+    <span className={names} style={styleName} tabIndex="0">
       {props.value}
     </span>
   );

@@ -18,11 +18,17 @@ export const getPokemonGenderless = createAsyncThunk("pokemonGenderless", () =>
   agent.pokemonApis.allGenderless()
 );
 
+export const getPokemonDescription = createAsyncThunk(
+  "pokemonDescription",
+  (id) => agent.pokemonApis.description(id)
+);
+
 const initialState = {
   genders: [],
   males: [],
   females: [],
   genderless: [],
+  species: [],
 };
 
 const pokemonSlice = createSlice({
@@ -62,6 +68,9 @@ const pokemonSlice = createSlice({
         );
         state.genderless = arr;
       }
+    });
+    builder.addCase(getPokemonDescription.fulfilled, (state, action) => {
+      state.species = action.payload;
     });
   },
 });

@@ -3,6 +3,8 @@ import { Col, Row } from "react-bootstrap";
 import PokemonItem from "./PokemonItem";
 import { useState } from "react";
 import PokemonContext from "@/application/context/PokemonContext";
+import Modal from "react-bootstrap/Modal";
+import PokemonDetail from "./PokemonDetail";
 
 const PokemonList = ({ data }) => {
   const PokemonContextData = useContext(PokemonContext);
@@ -35,6 +37,14 @@ const PokemonList = ({ data }) => {
           );
         })}
       </Row>
+      <Modal show={show} onHide={handleClose} dialogClassName="modal-50w">
+        <Modal.Header>
+          <Modal.Title></Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <PokemonDetail data={selectedPokemon} />
+        </Modal.Body>
+      </Modal>
     </Fragment>
   );
 };

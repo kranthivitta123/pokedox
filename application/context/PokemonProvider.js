@@ -93,7 +93,7 @@ const PokemonProvider = ({ children }) => {
     reset() {
       dispatch({ type: "RESET"});
     },
-    setModal() {
+    setModal(data) {
       dispatch({ type: "SETMODAL", payload: data });
     },
   };

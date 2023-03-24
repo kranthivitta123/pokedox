@@ -9,7 +9,6 @@ import { useOutsideAlerter } from "../../hooks/outsideClick";
 const CustomDropDown = (props) => {
   const [showPanel, setShowPanel] = useState(false);
   const { name } = props;
-  console.log("props values",props)
   const { selectedTypes } = props;
   const { selectedGenders } = props;
   const wrapperRef = useRef(name);

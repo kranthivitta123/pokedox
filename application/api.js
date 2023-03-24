@@ -14,7 +14,6 @@ function serialize(object) {
 
 const agent = async (url, body, method = "GET") => {
   const headers = new Headers();
-
   if (body) {
     headers.set("Content-Type", "application/json");
   }
@@ -57,6 +56,7 @@ const pokemonApis = {
   allGenderless: (query) => requests.get("/gender/3/", query),
   allGenders: (query) => requests.get("/gender", query),
   allPokemon: (query) => requests.get("/pokemon", query),
+  description: (id) => requests.get(`/pokemon-species/${id}`, {}),
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export

@@ -10,7 +10,6 @@ import PokemonContext from "@/application/context/PokemonContext";
 const Filters = (props) => {
   const { type } = props;
   const PokemonContextData = useContext(PokemonContext);
-  console.log("Filter ", PokemonContextData);
   const handleSearch = (str) => {
     PokemonContextData.changeSearch(str);
   };
