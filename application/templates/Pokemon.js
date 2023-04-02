@@ -12,6 +12,7 @@ import { Button, Col, Container, Row } from "react-bootstrap";
 import Banner from "../components/common/Banner";
 import Filters from "../components/feature/Filters";
 import PokemonList from "../components/feature/PokemonList";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 let pokemonList = [];
 
@@ -22,6 +23,7 @@ const Pokemon = ({ types }) => {
   const [pokemonUrl, setPokemonUrl] = useState(
     "https://pokeapi.co/api/v2/pokemon"
   );
+  console.log("Pokemon url", pokemonUrl);
   const { genders, males, females, genderless } = useSelector(
     (state) => state.pokemon
   );
@@ -42,7 +44,7 @@ const Pokemon = ({ types }) => {
    */
 
   const getPokemons = useCallback(() => {
-    agent.pokemonApis.allPokemon().then((data) => {
+    agent.pokemonApis.allPokemon(pokemonUrl).then((data) => {
       setPokemonUrl(data.next);
       getPokemonDetails(data.results);
     });
@@ -85,7 +87,9 @@ const Pokemon = ({ types }) => {
               item.id.toString().indexOf(contextData.search) !== -1
             : true) &&
           (contextData.types.length ? checkTypes(item) : true) &&
-          (contextData.gender && contextData.gender.length ? checkGenders(item) : true)
+          (contextData.gender && contextData.gender.length
+            ? checkGenders(item)
+            : true)
         );
       });
       setPokemonData(filteredArr);
@@ -165,26 +169,25 @@ const Pokemon = ({ types }) => {
       </Row>
       <Row className="mt-4 mb-4">
         <Col>
-          {pokemonData ? (
-            <PokemonList
-              data={pokemonData}
-              male={males}
-              female={females}
-              genderless={genderless}
-            />
-          ) : (
-            <h3>No Data Found</h3>
-          )}
+          <InfiniteScroll
+            dataLength={pokemonData.length}
+            next={getPokemons}
+            hasMore={true}
+            loader={<h4>Loading...</h4>}
+          >
+            {pokemonData ? (
+              <PokemonList
+                data={pokemonData}
+                male={males}
+                female={females}
+                genderless={genderless}
+              />
+            ) : (
+              <h3>No Data Found</h3>
+            )}
+          </InfiniteScroll>
         </Col>
       </Row>
-      <div
-        className="d-flex justify-content-center align-items-center m-auto"
-        style={{ width: "20%" }}
-      >
-        <Button variant="dark w-20" onClick={() => getPokemons()}>
-          Load More
-        </Button>
-      </div>
     </Container>
   );
 };

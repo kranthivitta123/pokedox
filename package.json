@@ -9,11 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "eslint": "8.36.0",
-    "eslint-config-next": "13.2.4",
-    "next": "13.2.4",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@fortawesome/fontawesome-free": "^6.1.1",
@@ -25,7 +20,13 @@
     "@mui/material": "^5.10.7",
     "@reduxjs/toolkit": "^1.8.3",
     "bootstrap": "^5.2.1",
+    "eslint": "8.36.0",
+    "eslint-config-next": "13.2.4",
+    "next": "13.2.4",
+    "react": "18.2.0",
     "react-bootstrap": "^2.5.0",
+    "react-dom": "18.2.0",
+    "react-infinite-scroll-component": "^6.1.0",
     "react-redux": "^8.0.2",
     "redux": "^4.2.0"
   }

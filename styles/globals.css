@@ -9,6 +9,10 @@ body {
   background: #deeded !important;
 }
 
+.infinite-scroll-component {
+  overflow-x: hidden !important;
+}
+
 input {
   width: 100%;
   background: #c9dde2;

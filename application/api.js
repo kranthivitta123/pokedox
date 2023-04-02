@@ -49,13 +49,37 @@ const requests = {
   },
 };
 
+const getPokemon = async (url, body, method = "GET") => {
+  const headers = new Headers();
+  if (body) {
+    headers.set("Content-Type", "application/json");
+  }
+
+  const response = await fetch(`${url}`, {
+    method,
+    headers,
+    body: body ? JSON.stringify(body) : undefined,
+  });
+  let result;
+
+  try {
+    result = await response.json();
+  } catch (error) {
+    result = { errors: { [response.status]: [response.statusText] } };
+  }
+
+  if (!response.ok) throw result;
+
+  return result;
+};
+
 const pokemonApis = {
   allTypes: (query) => requests.get(`/type`, query),
   allFemales: (query) => requests.get("/gender/1/", query),
   allMales: (query) => requests.get("/gender/2/", query),
   allGenderless: (query) => requests.get("/gender/3/", query),
   allGenders: (query) => requests.get("/gender", query),
-  allPokemon: (query) => requests.get("/pokemon", query),
+  allPokemon: (url) => getPokemon(`${url}`),
   description: (id) => requests.get(`/pokemon-species/${id}`, {}),
 };
 
